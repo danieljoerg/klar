@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>klar — strength for the decades ahead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #0A0A0A;
+  --white:   #FFFFFF;
+  --stone:   #F2F2F0;
+  --mist:    #777773;
+  --border:  #E2E2DF;
+  --nordic:  #2D6A4F;
+  --sans:    'DM Sans', system-ui, sans-serif;
+  --display: 'Barlow', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 3rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  text-decoration: none;
+  border: 2px solid var(--black);
+  padding: 2px 8px;
+}
+.nav-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hero-left {
+  background: var(--white);
+  padding: 10rem 3.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-right: 1px solid var(--border);
+}
+
+.hero-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: up 0.7s ease forwards 0.2s;
+}
+
+.hero-title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(5rem, 9vw, 10rem);
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  color: var(--black);
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: up 0.8s ease forwards 0.35s;
+}
+
+.hero-body {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--mist);
+  max-width: 44ch;
+  margin-bottom: 1.2rem;
+  font-weight: 300;
+  opacity: 0;
+  animation: up 0.8s ease forwards 0.5s;
+}
+
+.hero-body strong { color: var(--black); font-weight: 500; }
+
+.hero-noise {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--mist);
+  max-width: 44ch;
+  margin-bottom: 3rem;
+  font-weight: 300;
+  border-left: 2px solid var(--nordic);
+  padding-left: 1.2rem;
+  opacity: 0;
+  animation: up 0.8s ease forwards 0.58s;
+}
+
+.hero-noise strong { color: var(--black); font-weight: 500; }
+
+/* ── FORM ── */
+.form-wrap {
+  opacity: 0;
+  animation: up 0.8s ease forwards 0.68s;
+}
+
+.form-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mist);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.form-row {
+  display: flex;
+  border: 1.5px solid var(--black);
+  max-width: 420px;
+}
+
+.form-input {
+  flex: 1;
+  padding: 1rem 1.2rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--black);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.form-input::placeholder { color: #BBBBBB; }
+
+.form-btn {
+  padding: 1rem 1.8rem;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.form-btn:hover { background: #333; }
+
+.form-note {
+  font-size: 0.7rem;
+  color: var(--mist);
+  margin-top: 0.75rem;
+}
+
+.form-success { display: none; padding: 1rem 0; }
+.form-success-text { font-size: 0.9rem; color: var(--nordic); font-weight: 400; }
+
+/* ── HERO RIGHT ── */
+.hero-right {
+  background: #0A0A0A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2.5rem 4rem;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards 0.4s;
+}
+
+.hero-right::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--nordic);
+}
+
+/* ── PRODUCT CARDS — 3×2 GRID ── */
+.can-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #2A2A2A;
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 1px;
+}
+
+.can {
+  background: #1C1C1C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background 0.2s;
+  aspect-ratio: 3 / 4;
+  padding: 14px 8px;
+}
+
+.can:hover { background: #252525; }
+
+.can::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--nordic);
+}
+
+.can-number {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 0.6rem;
+  color: var(--nordic);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.can-inner { text-align: center; width: 100%; }
+
+.can-line { width: 20px; height: 1px; background: rgba(255,255,255,0.15); margin: 0 auto 7px; }
+
+.can-generic {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.6rem;
+  color: #FFFFFF;
+  letter-spacing: 0.06em;
+  display: block;
+  line-height: 1.3;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.can-name {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+  color: rgba(255,255,255,0.55);
+  display: block;
+  line-height: 1;
+}
+
+/* ── HERO STATS ── */
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: #2A2A2A;
+  width: 100%;
+  max-width: 420px;
+}
+
+.stat { background: #1C1C1C; padding: 1.3rem; }
+
+.stat-n {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+  color: var(--white);
+  display: block;
+  line-height: 1;
+}
+
+.stat-l {
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-top: 5px;
+  display: block;
+  font-family: var(--sans);
+}
+
+/* ── TICKER ── */
+.ticker {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 0;
+  overflow: hidden;
+  background: var(--stone);
+}
+
+.ticker-track {
+  display: flex;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker-item {
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mist);
+  padding: 0 3rem;
+  flex-shrink: 0;
+}
+
+.ticker-dot { color: var(--nordic); margin-right: 3rem; }
+
+/* ── THE GAP SECTION ── */
+.noise-section {
+  padding: 9rem 3rem;
+  border-top: 1px solid var(--border);
+  background: var(--stone);
+}
+
+.noise-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.noise-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mist);
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.noise-headline {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  color: var(--black);
+}
+
+.noise-lead {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--black);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.noise-body {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--mist);
+  font-weight: 300;
+}
+
+/* ── PRODUCTS ── */
+.products {
+  padding: 9rem 3rem;
+  background: var(--stone);
+  border-top: 1px solid var(--border);
+}
+
+.products-inner { max-width: 1200px; margin: 0 auto; }
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2.5rem;
+}
+
+.products-title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  color: var(--black);
+}
+
+.products-note {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.products-intro {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: var(--mist);
+  font-weight: 300;
+  max-width: 60ch;
+  margin-bottom: 4rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
+.prod {
+  background: var(--white);
+  padding: 2.5rem 2rem;
+  transition: background 0.15s;
+}
+
+.prod:hover { background: #FAFAF8; }
+
+.prod-n {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--nordic);
+  display: block;
+  margin-bottom: 0.8rem;
+  font-family: var(--display);
+  font-weight: 900;
+}
+
+.prod-generic {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--black);
+  display: block;
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+
+.prod-klar-name {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 0.85rem;
+  color: var(--mist);
+  display: block;
+  margin-bottom: 1.2rem;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+}
+
+.prod-why {
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: var(--mist);
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+
+.prod-quality {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--mist);
+  display: none;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  border-left: 1px solid var(--nordic);
+  padding-left: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.prod-quality.open { display: block; }
+
+.prod-toggle {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mist);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1rem;
+  font-family: var(--sans);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s;
+}
+
+.prod-toggle:hover { color: var(--black); }
+
+.prod-toggle-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.prod-toggle.open .prod-toggle-arrow { transform: rotate(180deg); }
+
+.prod-cert {
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nordic);
+  border-top: 1px solid var(--border);
+  padding-top: 0.8rem;
+  display: block;
+}
+
+/* ── STACK + CTA ── */
+.stack-section {
+  border-top: 2px solid var(--nordic);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 540px;
+}
+
+.stack-inner { display: contents; }
+
+.stack-left {
+  background: var(--black);
+  padding: 7rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stack-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.stack-headline {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+
+.stack-body {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+}
+
+.stack-right {
+  background: var(--white);
+  padding: 7rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--border);
+}
+
+.stack-note {
+  font-size: 0.7rem;
+  color: var(--mist);
+  letter-spacing: 0.06em;
+  margin-top: 1rem;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--stone);
+}
+
+.footer-logo {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  border: 2px solid var(--black);
+  padding: 2px 7px;
+}
+
+.footer-tag {
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+.footer-note {
+  font-size: 0.62rem;
+  color: var(--mist);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-tag { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 7rem 1.5rem 4rem; border-right: none; }
+  .hero-right { min-height: 55vh; padding: 4rem 1.5rem 3rem; }
+  .can-group { max-width: 340px; }
+  .noise-section { padding: 5rem 1.5rem; }
+  .noise-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .products { padding: 5rem 1.5rem; }
+  .products-grid { grid-template-columns: 1fr 1fr; }
+  .stack-section { grid-template-columns: 1fr; }
+  .stack-left, .stack-right { padding: 4rem 1.5rem; }
+  footer { flex-direction: column; gap: 1rem; padding: 2rem 1.5rem; text-align: center; }
+}
+
+@media (max-width: 600px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .noise-headline { font-size: 2.8rem; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">klar</a>
+  <span class="nav-tag">Six supplements for serious strength after 40.</span>
+  <span class="nav-tag" style="display:none;" id="nav-count"></span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">2026 · First in line</span>
+    <h1 class="hero-title">Not<br>younger.<br>Stronger.</h1>
+    <p class="hero-body">
+      <strong>You've decided to be stronger at 50 than you were at 25.</strong> This stack was built for exactly that decision.
+    </p>
+    <p class="hero-noise">
+      The fitness industry is built for 22-year-olds. <strong>klar is the first supplement stack built for people who train to stay powerful for decades.</strong>
+    </p>
+
+    <div class="form-wrap">
+      <span class="form-label">Join the waitlist — first to know, first access</span>
+      <div class="form-row">
+        <input class="form-input" type="email" id="email-input" placeholder="your@email.com" autocomplete="email">
+        <button class="form-btn" onclick="handleSubmit()">I'm in</button>
+      </div>
+      <p class="form-note">No spam. We'll mail you when we launch.</p>
+      <div class="form-success" id="form-success">
+        <p class="form-success-text">You're in. We'll be in touch when klar is ready.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="can-group">
+
+      <!-- 01 Whey Isolate — ground -->
+      <div class="can">
+        <div class="can-inner">
+          <span class="can-number">#1</span>
+          <div class="can-line"></div>
+          <span class="can-generic">Whey<br>Isolate</span>
+          <span class="can-name">ground</span>
+        </div>
+      </div>
+
+      <!-- 02 Creatine — force -->
+      <div class="can">
+        <div class="can-inner">
+          <span class="can-number">#2</span>
+          <div class="can-line"></div>
+          <span class="can-generic">Creatine</span>
+          <span class="can-name">force</span>
+        </div>
+      </div>
+
+      <!-- 03 Magnesium — recover -->
+      <div class="can">
+        <div class="can-inner">
+          <span class="can-number">#3</span>
+          <div class="can-line"></div>
+          <span class="can-generic">Magne-<br>sium</span>
+          <span class="can-name">recover</span>
+        </div>
+      </div>
+
+      <!-- 04 Vitamin D3+K2 — light -->
+      <div class="can">
+        <div class="can-inner">
+          <span class="can-number">#4</span>
+          <div class="can-line"></div>
+          <span class="can-generic">Vitamin<br>D3 + K2</span>
+          <span class="can-name">light</span>
+        </div>
+      </div>
+
+      <!-- 05 Zinc + Vitamin C — guard -->
+      <div class="can">
+        <div class="can-inner">
+          <span class="can-number">#5</span>
+          <div class="can-line"></div>
+          <span class="can-generic">Zinc +<br>Vit. C</span>
+          <span class="can-name">guard</span>
+        </div>
+      </div>
+
+      <!-- 06 Omega-3 — flow -->
+      <div class="can">
+        <div class="can-inner">
+          <span class="can-number">#6</span>
+          <div class="can-line"></div>
+          <span class="can-generic">Omega-3</span>
+          <span class="can-name">flow</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-n">6</span>
+        <span class="stat-l">Products</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">0</span>
+        <span class="stat-l">Fillers</span>
+      </div>
+      <div class="stat">
+        <span class="stat-n">40+</span>
+        <span class="stat-l">Built for</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Creapure® Certified</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">No Fillers</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Third Party Tested</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Arla Whey Source</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Full Transparency</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">mTOR Optimised</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Creapure® Certified</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">No Fillers</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Third Party Tested</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Arla Whey Source</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">Full Transparency</span><span class="ticker-dot">·</span>
+    <span class="ticker-item">mTOR Optimised</span><span class="ticker-dot">·</span>
+  </div>
+</div>
+
+<!-- INDUSTRY NOISE SECTION -->
+<section class="noise-section">
+  <div class="noise-inner">
+    <div class="noise-left">
+      <span class="noise-tag">The gap</span>
+      <h2 class="noise-headline">The industry<br>was never<br>built for you.</h2>
+    </div>
+    <div class="noise-right">
+      <p class="noise-lead">
+        Walk any supplement aisle and you'll find thousands of products. Don't even bother. It's all just noise. Built for 22-year-olds chasing a pump.
+      </p>
+      <p class="noise-body">
+        You're different.<br>
+        You're in for the long game.<br>
+        Building and guarding muscle for longevity.<br><br>
+        <strong style="color: var(--black); font-weight:500;">klar is the supplement stack built for that. So you can focus on each rep.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <div class="products-inner">
+    <div class="products-header">
+      <h2 class="products-title">Six supplements.<br>That's it.</h2>
+      <span class="products-note">The core six.</span>
+    </div>
+    <p class="products-intro">
+      Six scientifically proven supplements for lifters 40+. Each one picked because they reinforce each other and compound. In the right forms, at the right doses. That's it.
+    </p>
+    <div class="products-grid">
+
+      <div class="prod">
+        <span class="prod-n">#1</span>
+        <span class="prod-generic">Creatine Monohydrate</span>
+        <span class="prod-klar-name">force</span>
+        <span class="prod-why">The most researched performance supplement in existence. Powers ATP regeneration for strength output. Critical after 40 where natural phosphocreatine capacity declines.</span>
+        <button class="prod-toggle" onclick="toggleQuality(this)">Why ours is different <span class="prod-toggle-arrow">↓</span></button>
+        <span class="prod-quality">Creapure® only — 99.9%+ purity, manufactured in Germany to pharmaceutical standards. Not all creatine is equal.</span>
+        <span class="prod-cert">Creapure® · 500g · One ingredient</span>
+      </div>
+
+      <div class="prod">
+        <span class="prod-n">#2</span>
+        <span class="prod-generic">Whey Isolate</span>
+        <span class="prod-klar-name">ground</span>
+        <span class="prod-why">After 40, mTOR sensitivity declines. You need leucine-rich, fast-absorbing protein to reliably trigger muscle protein synthesis. Isolate — not concentrate — delivers it cleanly.</span>
+        <button class="prod-toggle" onclick="toggleQuality(this)">Why ours is different <span class="prod-toggle-arrow">↓</span></button>
+        <span class="prod-quality">Arla source — grass-fed Nordic dairy, cold-processed. No sweeteners, no fillers. What you see is what's inside.</span>
+        <span class="prod-cert">Informed Sport · 900g · No fillers</span>
+      </div>
+
+      <div class="prod">
+        <span class="prod-n">#3</span>
+        <span class="prod-generic">Magnesium</span>
+        <span class="prod-klar-name">rest</span>
+        <span class="prod-why">Cofactor in 300+ enzymatic reactions — muscle contraction, protein synthesis, sleep quality. If you train hard and sleep poorly, this is likely a core issue.</span>
+        <button class="prod-toggle" onclick="toggleQuality(this)">Why ours is different <span class="prod-toggle-arrow">↓</span></button>
+        <span class="prod-quality">Bisglycinate form only. Oxide and citrate absorb poorly. Bisglycinate crosses the intestinal wall intact — dramatically higher uptake.</span>
+        <span class="prod-cert">Bisglycinate · 120 caps · High absorption</span>
+      </div>
+
+      <div class="prod">
+        <span class="prod-n">#4</span>
+        <span class="prod-generic">Vitamin D3 + K2</span>
+        <span class="prod-klar-name">light</span>
+        <span class="prod-why">D3 regulates testosterone, calcium absorption, and immune function. K2 routes calcium into bone — not arteries. Most people in temperate climates are chronically deficient.</span>
+        <button class="prod-toggle" onclick="toggleQuality(this)">Why ours is different <span class="prod-toggle-arrow">↓</span></button>
+        <span class="prod-quality">5,000 IU D3 + 100mcg K2 as MK-7 — not the inferior MK-4 form. 72-hour half-life. Most D3 supplements omit K2 entirely.</span>
+        <span class="prod-cert">5000 IU D3 · 100mcg MK-7 · 90 caps</span>
+      </div>
+
+      <div class="prod">
+        <span class="prod-n">#5</span>
+        <span class="prod-generic">Zinc + Vitamin C</span>
+        <span class="prod-klar-name">guard</span>
+        <span class="prod-why">Zinc drives testosterone synthesis, immune defence, and collagen repair — all declining with age and training stress. Vitamin C is the rate-limiting cofactor for connective tissue recovery.</span>
+        <button class="prod-toggle" onclick="toggleQuality(this)">Why ours is different <span class="prod-toggle-arrow">↓</span></button>
+        <span class="prod-quality">Zinc bisglycinate — 3–4× the absorption rate of sulphate or oxide forms. Paired with Quali®-C for verified purity.</span>
+        <span class="prod-cert">Bisglycinate · High bioavailability · 90 caps</span>
+      </div>
+
+      <div class="prod">
+        <span class="prod-n">#6</span>
+        <span class="prod-generic">Omega-3</span>
+        <span class="prod-klar-name">flow</span>
+        <span class="prod-why">Reduces systemic inflammation, supports cardiovascular health, improves muscle protein synthesis in ageing muscle. Most omega-3 products are chronically underdosed — therapeutic effect requires 3g+ EPA/DHA daily.</span>
+        <button class="prod-toggle" onclick="toggleQuality(this)">Why ours is different <span class="prod-toggle-arrow">↓</span></button>
+        <span class="prod-quality">Triglyceride form — 70% more bioavailable than the ethyl ester used in 80% of commercial products. Third-party tested.</span>
+        <span class="prod-cert">3g EPA/DHA · Triglyceride form · 90 caps</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STACK + CTA -->
+<section class="stack-section">
+  <div class="stack-inner">
+    <div class="stack-left">
+      <span class="stack-tag">The klar stack</span>
+      <h2 class="stack-headline">Your stack.<br>Always there.</h2>
+      <p class="stack-body">
+        Monthly subscription — set and forget.<br><br>
+        Never worry about running out.<br>
+        So you can focus on building your strong life.<br><br>
+        Pause, adjust, cancel — always.
+      </p>
+    </div>
+    <div class="stack-right">
+      <span class="form-label">Join the waitlist</span>
+      <div class="form-row" id="bottom-form-row">
+        <input class="form-input" type="email" id="email-input-2" placeholder="your@email.com" autocomplete="email">
+        <button class="form-btn" onclick="handleSubmit2()">I'm in</button>
+      </div>
+      <p class="form-note">No spam. We'll mail you when we launch.</p>
+      <div class="form-success" id="form-success-2">
+        <p class="form-success-text">You're in. We'll be in touch when klar is ready.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">klar</span>
+  <span class="footer-tag">strength for the decades ahead · zürich</span>
+  <span class="footer-note">© 2026 klar. All rights reserved.</span>
+</footer>
+
+<script>
+  function toggleQuality(btn) {
+    const quality = btn.nextElementSibling;
+    quality.classList.toggle('open');
+    btn.classList.toggle('open');
+    btn.querySelector('.prod-toggle-arrow').textContent = quality.classList.contains('open') ? '↑' : '↓';
+  }
+
+  async function submitEmail(email, inputEl, formRowEl, noteEl, successEl) {
+    if (!email || !email.includes('@')) {
+      inputEl.style.outline = '2px solid #CC4444';
+      return;
+    }
+
+    const btn = formRowEl.querySelector('.form-btn');
+    btn.textContent = '...';
+    btn.disabled = true;
+    inputEl.disabled = true;
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        formRowEl.style.display = 'none';
+        if (noteEl) noteEl.style.display = 'none';
+        successEl.style.display = 'block';
+        updateCount();
+      } else {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+        inputEl.disabled = false;
+        inputEl.style.outline = '2px solid #CC4444';
+      }
+    } catch {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
+      inputEl.disabled = false;
+    }
+  }
+
+  function handleSubmit() {
+    submitEmail(
+      document.getElementById('email-input').value,
+      document.querySelector('.form-row'),
+      document.querySelector('.form-row'),
+      document.querySelector('.form-note'),
+      document.getElementById('form-success')
+    );
+  }
+
+  function handleSubmit2() {
+    submitEmail(
+      document.getElementById('email-input-2').value,
+      document.getElementById('bottom-form-row'),
+      document.getElementById('bottom-form-row'),
+      null,
+      document.getElementById('form-success-2')
+    );
+  }
+
+  function updateCount() {
+    const nav = document.getElementById('nav-count');
+    nav.style.display = 'block';
+    nav.textContent = 'waitlist growing';
+  }
+
+  document.getElementById('email-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') handleSubmit();
+  });
+
+  document.getElementById('email-input-2').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') handleSubmit2();
+  });
+</script>
+
+</body>
+</html>
