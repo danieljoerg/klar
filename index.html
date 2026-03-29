@@ -934,21 +934,20 @@ footer {
     btn.querySelector('.prod-toggle-arrow').textContent = quality.classList.contains('open') ? '↑' : '↓';
   }
 
-  async function submitEmail(email, inputEl, formRowEl, noteEl, successEl) {
+  async function submitEmail(email, formRowEl, noteEl, successEl) {
     if (!email || !email.includes('@')) {
-      inputEl.style.outline = '2px solid #CC4444';
+      formRowEl.style.outline = '2px solid #CC4444';
       return;
     }
 
     const btn = formRowEl.querySelector('.form-btn');
     btn.textContent = '...';
     btn.disabled = true;
-    inputEl.disabled = true;
 
     try {
-      const res = await fetch('/api/subscribe', {
+      const res = await fetch('https://formspree.io/f/xzdkerlo', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ email }),
       });
 
@@ -956,24 +955,19 @@ footer {
         formRowEl.style.display = 'none';
         if (noteEl) noteEl.style.display = 'none';
         successEl.style.display = 'block';
-        updateCount();
       } else {
         btn.textContent = 'Try again';
         btn.disabled = false;
-        inputEl.disabled = false;
-        inputEl.style.outline = '2px solid #CC4444';
       }
     } catch {
       btn.textContent = 'Try again';
       btn.disabled = false;
-      inputEl.disabled = false;
     }
   }
 
   function handleSubmit() {
     submitEmail(
       document.getElementById('email-input').value,
-      document.querySelector('.form-row'),
       document.querySelector('.form-row'),
       document.querySelector('.form-note'),
       document.getElementById('form-success')
@@ -983,7 +977,6 @@ footer {
   function handleSubmit2() {
     submitEmail(
       document.getElementById('email-input-2').value,
-      document.getElementById('bottom-form-row'),
       document.getElementById('bottom-form-row'),
       null,
       document.getElementById('form-success-2')
